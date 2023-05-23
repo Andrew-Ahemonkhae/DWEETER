@@ -3,5 +3,33 @@
 {% block title%}PROFILE PAGE{% endblock%}
 
 {% block body%}
-    <h1>Hello<h1>
+{% load thumbnail%}
+    <!-- component -->
+<div class="bg-gray-200 font-sans h-screen w-full flex flex-row justify-center items-center">
+    <div class="card w-96 mx-auto bg-white  shadow-xl hover:shadow">
+        {% thumbnail profile.image "373x373" crop="center" as im%}
+       <img class="w-32 mx-auto rounded-full -mt-20 border-8 border-white" src="{{im.url}}" height="{{im.height}}" alt="">
+       {% endthumbnail%}
+       <div class="text-center mt-2 text-3xl font-medium">{{profile.user.username}}</div>
+       <div class="text-center mt-2 font-light text-sm">@devpenzil</div>
+       <div class="px-6 text-center mt-2 font-light text-sm">
+         {# TODO add url for bio editing and create field for profile customization.#}
+        <p>
+           Front end Developer, avid reader. Love to take a long walk, swim
+         </p>
+       </div>
+       <hr class="mt-8">
+       <div class="flex p-4">
+         <div class="w-1/2 text-center">
+           <span class="font-bold">1.8 k</span> Followers
+         </div>
+         <div class="w-0 border border-gray-300">
+           
+         </div>
+         <div class="w-1/2 text-center">
+           <span class="font-bold">2.0 k</span> Following
+         </div>
+       </div>
+    </div>
+  </div>
 {% endblock%}

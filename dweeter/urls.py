@@ -21,6 +21,7 @@ from feed import urls as feed_urls
 from profiles import urls as profiles_urls
 from django.conf import settings 
 from django.conf.urls.static import static
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include(feed_urls, namespace="feed")),
