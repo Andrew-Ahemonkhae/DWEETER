@@ -1,8 +1,11 @@
+
 {% extends "base.html"%}
+
 
 {% block title%}PROFILE PAGE{% endblock%}
 
 {% block body%}
+{% load static %}
 {% load thumbnail%}
     <!-- component -->
 <div class="bg-gray-200 font-sans h-screen w-full flex flex-row justify-center items-center">
@@ -11,25 +14,49 @@
        <img class="w-32 mx-auto rounded-full -mt-20 border-8 border-white" src="{{im.url}}" height="{{im.height}}" alt="">
        {% endthumbnail%}
        <div class="text-center mt-2 text-3xl font-medium">{{profile.user.username}}</div>
-       <div class="text-center mt-2 font-light text-sm">@devpenzil</div>
+       <div class="text-center font-normal text-lg">{{posts}} posts</div>
        <div class="px-6 text-center mt-2 font-light text-sm">
          {# TODO add url for bio editing and create field for profile customization.#}
         <p>
            Front end Developer, avid reader. Love to take a long walk, swim
          </p>
        </div>
-       <hr class="mt-8">
-       <div class="flex p-4">
-         <div class="w-1/2 text-center">
+       <div>
+        {% if request.user.is_authenticated%}
+            {% if request.user != profile.user%}
+                {% if you_follow%}
+                <div>
+                  <div class="my-3">
+                      <button class=" bg-white text-gray-800 font-bold rounded border-b-2 border-green-500 hover:border-green-600 hover:bg-green-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center" type="submit" id="unfollow" onclick="dtFollower()">Unfollow</button>
+                  </div>
+              </div> 
+               {% else%}
+               <div>
+                <div class="my-3">
+                    <button class=" bg-white text-gray-800 font-bold rounded border-b-2 border-green-500 hover:border-green-600 hover:bg-green-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center" type="submit" id="follow" onclick="dtFollower()">Follow</button>
+                </div>
+            </div> 
+                {% endif %}
+                
+            {% else %}        
+                <p>This is your own profile page!!!!</p>
+            {% endif%} 
+        {% endif%}
+    </div>
+      <hr class="mt-8">
+      <div class="flex p-4">
+        <div class="w-1/2 text-center">
            <span class="font-bold">1.8 k</span> Followers
-         </div>
-         <div class="w-0 border border-gray-300">
+        </div>
+        <div class="w-0 border border-gray-300">
            
-         </div>
-         <div class="w-1/2 text-center">
+        </div>
+        <div class="w-1/2 text-center">
            <span class="font-bold">2.0 k</span> Following
-         </div>
-       </div>
+        </div>
+        
+      </div>
     </div>
   </div>
+  <script src="{% static 'js/main.js' %}"></script>
 {% endblock%}
